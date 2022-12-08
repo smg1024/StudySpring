@@ -29,5 +29,14 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- include -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<include-prelude>/include/top.jspf</include-prelude>
+			<include-coda>/include/bottom.jspf</include-coda>
+		</jsp-property-group>
+	</jsp-config>
 
 </web-app>

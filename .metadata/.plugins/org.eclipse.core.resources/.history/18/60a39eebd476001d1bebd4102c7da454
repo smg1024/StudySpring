@@ -1,0 +1,41 @@
+@charset "UTF-8";
+body, ul, li{
+	margin:0;
+	padding:0;
+}
+
+.container{
+	width:1000px;
+	margin:0 auto;
+}
+
+a:link, a:visited{
+	text-decoration:none;
+	color:blue;
+}
+a:hover{
+	text-decoration:underline;
+	color:red;
+}
+
+/********************TOP**********************/
+.topMenu>ul{
+	/* height:50px; */
+	overflow:auto;
+	background-color:orange;
+}
+
+.topMenu>ul>li{
+	float:left;
+	height:50px;
+	line-height:50px;
+	font-size:1.2em;
+	padding:0 60px;
+	
+}
+
+.bottomMenu{
+	text-align:center;
+	height:100px;
+	background-color:#ddd;
+}

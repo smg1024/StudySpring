@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/js_css/style.css" type="text/css">
 <title>controllerTest/test.jsp</title>
 </head>
 <body>
