@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<h1 style="text-align:center">풀떼기 사랑행!</h1>
-		<img src="<%= request.getContextPath() %>/img/ddance.gif" width="50%">
+		<img src="<%= request.getContextPath() %>/img/ddance.gif" width="80%" style="padding:50px;">
 	</div>
 </body>
 </html>

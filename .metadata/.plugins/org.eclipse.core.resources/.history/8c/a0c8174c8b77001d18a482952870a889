@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- parameter로 넘어온 변수 : username -->
+<style>
+	.topMenu, .bottomMenu{
+		display:none;
+	}
+</style>
+<div>
+	<div>
+		아이디 중복확인
+	</div>
+	<hr>
+	<div>
+		<form action="/myapp/member/idCheck">
+			아이디 입력 : <input type="text" name="username" id="username" value="${ param.username }">
+			<input type="submit" value="중복확인">
+		</form>
+	</div>
+</div>
