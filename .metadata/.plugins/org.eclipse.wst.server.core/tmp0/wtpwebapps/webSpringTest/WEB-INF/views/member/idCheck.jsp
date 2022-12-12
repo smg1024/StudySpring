@@ -12,9 +12,9 @@
 	}
 </style>
 <script>
-	$(function(){
+ 	$(function(){
 		$("#idCheckForm").submit(function(){
-			if($("#userid").val()==""){
+			if($("#username").val()==""){
 				alert("아이디를 입력하세요.");
 				return false;
 			}
@@ -30,7 +30,18 @@
 		// window 닫기
 		window.close();
 	}
+	
+	/* onsubmit='return idCheck' */
+/* 	function idCheck(){
+		if(document.getElementById("username").value = ""){
+			alert("아이디를 입력하세요.");
+			return false;
+		}else{
+			return true;
+		}
+	} */
 </script>
+<title>아이디 중복확인</title>
 <div>
 	<div>
 		<!-- 사용 가능 -->
@@ -45,7 +56,7 @@
 	</div>
 	<hr>
 	<div>
-		<form action="/myapp/member/idCheck" onsubmit="return idCheck()" id="idCheckForm">
+		<form action="/myapp/member/idCheck" id="idCheckForm">
 			아이디 입력 : <input type="text" name="username" id="username" value="${ param.username }">
 			<input type="submit" value="중복확인">
 		</form>

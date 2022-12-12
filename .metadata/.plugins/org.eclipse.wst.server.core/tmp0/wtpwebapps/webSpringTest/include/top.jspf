@@ -11,9 +11,15 @@
 <body>
 	<div class="topMenu">
 		<ul>
-			<li><a href="#">홈</a></li>
-			<li><a href="#">로그인</a><a href="/myapp/member/signup">회원가입</a></li>
-			<li><a href="#">로그아웃/회원정보수정</a></li>
+			<li><a href="/myapp/">홈</a></li>
+			<c:if test="${ logStatus!='Y' }">
+				<li><a href="/myapp/member/login">로그인</a></li>
+				<li><a href="/myapp/member/signup">회원가입</a></li>
+			</c:if>
+			<c:if test="${ logStatus=='Y' }">
+				<li><a href="/myapp/member/logout">로그아웃</a></li>
+				<li><a href="#">회원정보수정</a></li>
+			</c:if>
 			<li><a href="#">게시판</a></li>
 			<li><a href="#">자료실</a></li>
 		</ul>

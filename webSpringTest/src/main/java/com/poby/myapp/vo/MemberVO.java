@@ -4,7 +4,12 @@ public class MemberVO {
 	private String username;
 	private String password;
 	private String name;
+	
 	private String tel;
+	private String tel1;
+	private String tel2;
+	private String tel3;
+	
 	private String email;
 	private String zipcode;
 	private String addr;
@@ -36,12 +41,43 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getTel() {
+		tel = tel1+"-"+tel2+"-"+tel3;
 		return tel;
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+		String t[] = tel.split("-");
+		tel1 = t[0];
+		tel2 = t[1];
+		tel3 = t[2];
 	}
+	
+	public String getTel1() {
+		return tel1;
+	}
+
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
+	}
+
+	public String getTel2() {
+		return tel2;
+	}
+
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
+
+	public String getTel3() {
+		return tel3;
+	}
+
+	public void setTel3(String tel3) {
+		this.tel3 = tel3;
+	}
+
 	public String getEmail() {
 		return email;
 	}
