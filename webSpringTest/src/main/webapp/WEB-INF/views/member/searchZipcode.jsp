@@ -32,6 +32,7 @@
 			// 회원가입 Form에 표시
 			opener.document.getElementById("zipcode").value = zipcode;
 			opener.document.getElementById("addr").value = addr;
+			opener.document.getElementById("detailaddr").value = "";
 			
 			// 팝업 닫기
 			self.close();

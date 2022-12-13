@@ -17,4 +17,10 @@ public interface MemberDAO {
 	
 	// 로그인
 	public MemberVO loginOk(MemberVO vo);
+	
+	// 회원정보수정 페이지 이동
+	public MemberVO myAccount(MemberVO vo);
+	
+	// 회원정보수정
+	public int myAccountOk(MemberVO vo);
 }

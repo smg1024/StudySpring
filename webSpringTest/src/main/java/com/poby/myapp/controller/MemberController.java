@@ -69,7 +69,7 @@ public class MemberController {
 		if(result>0) {
 			mav.setViewName("redirect:/");	// 뷰페이지 이름을 jsp파일명 대신 다른 컨트롤러의 매핑 주소로 보낸다
 		}else {
-			mav.setViewName("member/signupResult");
+			mav.setViewName("member/signupOk");
 		}
 		return mav;
 	}
@@ -111,6 +111,35 @@ public class MemberController {
 		session.invalidate();
 		mav.setViewName("redirect:/");
 		
+		return mav;
+	}
+	
+	// 회원정보수정 페이지로 이동
+	@RequestMapping("/member/myAccount")
+	public ModelAndView myAccount(MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		MemberVO VO = new MemberVO();
+		
+		VO = service.myAccount(vo);
+		
+		mav.addObject("vo", VO);
+		mav.setViewName("member/myAccount");
+		
+		return mav;
+	}
+	
+	// 회원정보수정 저장
+	@PostMapping("/member/myAccountOk")
+	public ModelAndView myAccountOk(MemberVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = service.myAccountOk(vo);
+		
+		if(result>0) {
+			mav.setViewName("redirect:/");
+		}else {
+			mav.setViewName("member/myAccountOk");
+		}
 		return mav;
 	}
 }

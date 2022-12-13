@@ -18,7 +18,7 @@
 			</c:if>
 			<c:if test="${ logStatus=='Y' }">
 				<li><a href="/myapp/member/logout">로그아웃</a></li>
-				<li><a href="#">회원정보수정</a></li>
+				<li><a href="/myapp/member/myAccount?username=${ username }&name=${ name }">회원정보수정</a></li>
 			</c:if>
 			<li><a href="#">게시판</a></li>
 			<li><a href="#">자료실</a></li>

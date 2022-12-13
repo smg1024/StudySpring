@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poby.myapp.dao.MemberDAO">
+	<select id="idCheck" resultType="int">
+		SELECT count(username) cnt FROM member_tbl WHERE username=#{param1}
+	</select>
+	<select id="searchZipcode" resultType="com.poby.myapp.vo.ZipcodeVO">
+		SELECT zipcode, city, street, bldg1, bldg2, bldgname, dong, num1, num2 
+		FROM zipcode_tbl WHERE street LIKE '%${param1}%'
+	</select>
+	<insert id="signupOk">
+		INSERT INTO member_tbl(username, password, name, tel, email, zipcode, addr, detailaddr) 
+		VALUES (#{username}, #{password}, #{name}, #{tel}, #{email}, #{zipcode}, #{addr}, #{detailaddr})
+	</insert>
+	<select id="loginOk" resultType="com.poby.myapp.vo.MemberVO">
+		SELECT username, name FROM member_tbl WHERE username=#{username} AND password=#{password}
+	</select>
+	<select id="myAccount" resultType="com.poby.myapp.vo.MemberVO">
+		SELECT username, password, name, tel, email, zipcode, addr, detailaddr
+		FROM member_tbl WHERE username=#{username} AND name=#{name}
+	</select>
+	<update id="myAccountOk" resultType="int">
+	
+	</update>	
+</mapper>

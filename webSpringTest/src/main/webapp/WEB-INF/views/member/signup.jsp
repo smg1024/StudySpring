@@ -106,7 +106,7 @@
 			<li><input type="text" name="email" id="email"></li>
 			<li>우편번호</li>
 			<li>
-				<input type="text" name="zipcode" id="zipcode">
+				<input type="text" name="zipcode" id="zipcode" readonly>
 				<input type="button" value="우편번호 찾기" id="searchZipcode">
 			</li>
 			<li>주소</li>

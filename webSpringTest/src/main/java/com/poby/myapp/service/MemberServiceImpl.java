@@ -34,4 +34,14 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO loginOk(MemberVO vo) {
 		return dao.loginOk(vo);
 	}
+
+	@Override
+	public MemberVO myAccount(MemberVO vo) {
+		return dao.myAccount(vo);
+	}
+
+	@Override
+	public int myAccountOk(MemberVO vo) {
+		return dao.myAccountOk(vo);
+	}
 }

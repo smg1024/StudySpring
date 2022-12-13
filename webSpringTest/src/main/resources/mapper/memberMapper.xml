@@ -18,4 +18,15 @@
 	<select id="loginOk" resultType="com.poby.myapp.vo.MemberVO">
 		SELECT username, name FROM member_tbl WHERE username=#{username} AND password=#{password}
 	</select>
+	<select id="myAccount" resultType="com.poby.myapp.vo.MemberVO">
+		SELECT username, password, name, tel, email, zipcode, addr, detailaddr 
+		FROM member_tbl WHERE username=#{username} AND name=#{name}
+	</select>
+	<update id="myAccountOk">
+		UPDATE member_tbl 
+		SET password=#{password}, tel=#{tel}, 
+			email=#{email}, zipcode=#{zipcode}, 
+			addr=#{addr}, detailaddr=#{detailaddr}
+		WHERE username=#{username} AND name=#{name}
+	</update>	
 </mapper>
