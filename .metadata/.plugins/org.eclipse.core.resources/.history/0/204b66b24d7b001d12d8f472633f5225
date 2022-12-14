@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.boardList>li{
+	float:left;
+	height:40px;
+	line-height:40px;
+	width:10%;
+	border-bottom:1px solid #ddd;
+}

@@ -93,8 +93,8 @@ public class MemberController {
 			mav.setViewName("member/login");
 		}else {
 			// 세션에 로그인 정보 저장
-			session.setAttribute("username", VO.getUsername());
-			session.setAttribute("name", VO.getName());
+			session.setAttribute("logUsername", VO.getUsername());
+			session.setAttribute("logName", VO.getName());
 			session.setAttribute("logStatus", "Y");
 			// 로그인 성공 시 홈페이지로 이동
 			mav.setViewName("redirect:/");

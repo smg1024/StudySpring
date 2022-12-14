@@ -1,0 +1,72 @@
+package com.poby.myapp.vo;
+
+public class PageVO {
+	// 페이징
+	private int nowPage = 1;	// 현재 페이지
+	private int dataPerPage = 5;	// 한 페이지에 표시할 데이터 수
+	private int totalData;	// 총 데이터 수
+	private int totalPage;	// 총 페이지 수
+	
+	// 페이지 번호 매길때...
+	private int pageCount = 5;	// 한번에 표시할 페이지 수
+	private int startPage = 1;	// 시작 페이지 - 범위에 따라 바뀜 ex)1,6,11,16
+	
+	// 검색
+	
+	
+	@Override
+	public String toString() {
+		return "PageVO [nowPage=" + nowPage + ", dataPerPage=" + dataPerPage + ", totalData=" + totalData
+				+ ", totalPage=" + totalPage + ", pageCount=" + pageCount + ", startPage=" + startPage + "]";
+	}
+	
+	public int getPageCount() {
+		return pageCount;
+	}
+
+
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+	
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+		
+		// 시작페이지 계산하기
+		startPage = ((nowPage-1)/pageCount)*pageCount+1;
+	}
+	public int getDataPerPage() {
+		return dataPerPage;
+	}
+	public void setDataPerPage(int dataPerPage) {
+		this.dataPerPage = dataPerPage;
+	}
+	public int getTotalData() {
+		return totalData;
+	}
+	public void setTotalData(int totalData) {
+		this.totalData = totalData;
+		
+		// 총 페이지 수 계산하기
+		totalPage = (int)Math.ceil((double)totalData/dataPerPage);
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+}

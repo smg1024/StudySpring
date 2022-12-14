@@ -1,0 +1,13 @@
+package com.poby.myapp.service;
+
+import java.sql.ResultSet;
+
+import com.poby.myapp.vo.BoardVO;
+
+public interface BoardService {
+	// 새 글 등록
+	public int boardPostOk(BoardVO vo);
+	
+	// 글 목록
+	public ResultSet boardList();
+}

@@ -1,0 +1,8 @@
+package com.poby.myapp.service;
+
+import com.poby.myapp.vo.BoardVO;
+
+public interface BoardService {
+	// 새 글 등록
+		public int boardPostOk(BoardVO vo);
+}
