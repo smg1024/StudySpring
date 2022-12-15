@@ -21,6 +21,7 @@
 		<ul>
 			<li>제목</li>
 			<li><input type="text" name="subject" id="subject" size="50"></li>
+			<li>내용</li>
 			<li>
 				<textarea name="content" id="content" rows="20" cols="100"></textarea>
 			</li>

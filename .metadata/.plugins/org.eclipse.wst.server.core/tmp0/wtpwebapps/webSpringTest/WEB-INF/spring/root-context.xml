@@ -20,6 +20,9 @@
 		<!-- boardMapper.xml, memberMapper.xml, dataMapper.xml -->
 		<property name="mapperLocations" value="classpath:/mapper/*Mapper.xml"></property>
 	</bean>
+	<!-- fileupload를 하기 위해서 multipartResolver객체를 생성해놓는다. -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	
 	<!-- DAO클래스가 있는 위치 -->
 	<mybatis-spring:scan base-package="com.poby.myapp.dao"></mybatis-spring:scan>
 	

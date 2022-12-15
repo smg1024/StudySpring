@@ -1,0 +1,15 @@
+package com.poby.myapp.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class DataController {
+
+}
+/*파일 업로드 구현을 위해서 필요한 framework
+ * commons-io 
+ * commons-fileupload를 pom.xml에 dependency추가
+ * 
+ */
+
+

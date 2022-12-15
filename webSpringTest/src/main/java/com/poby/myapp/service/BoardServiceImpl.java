@@ -26,8 +26,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int totalData() {
-		return dao.totalData();
+	public int totalData(PageVO pvo) {
+		return dao.totalData(pvo);
+	}
+
+	@Override
+	public BoardVO boardView(int postno) {
+		return dao.boardView(postno);
+	}
+
+	@Override
+	public int boardEditOk(BoardVO vo) {
+		return dao.boardEditOk(vo);
+	}
+
+	@Override
+	public int boardDel(int postno, String username) {
+		return dao.boardDel(postno, username);
 	}
 
 }

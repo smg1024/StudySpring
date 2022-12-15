@@ -1,0 +1,29 @@
+package com.poby.myapp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.poby.myapp.service.DataService;
+
+@Controller
+public class DataController {
+	@Autowired
+	DataService service;
+	
+	public String dataList(Model model) {
+		// 자료실 데이터 선택
+		
+		return "data/dataList";
+	}
+}
+/*
+ * 1. 파일 업로드 구현을 위해서 필요한 framework
+ * commons-io 
+ * commons-fileupload를 pom.xml에 dependency추가
+ * 
+ * 2. root-context.xml에 
+ * multipartResolver객체 생성
+ * 
+ */
+
+

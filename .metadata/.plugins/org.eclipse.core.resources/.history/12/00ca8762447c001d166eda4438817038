@@ -1,0 +1,5 @@
+package com.poby.myapp.service;
+
+public class DataServiceImpl implements DataService {
+
+}

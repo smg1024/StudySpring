@@ -13,5 +13,14 @@ public interface BoardService {
 	public List<BoardVO> boardList(PageVO pvo);
 	
 	// 총 데이터 수 구하기
-	public int totalData();
+	public int totalData(PageVO pvo);
+	
+	// 글 보기
+	public BoardVO boardView(int postno);
+	
+	// 글 수정
+	public int boardEditOk(BoardVO vo);
+	
+	// 글 삭제
+	public int boardDel(int postno, String username);
 }

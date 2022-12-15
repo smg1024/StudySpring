@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.poby.myapp.dao.BoardDAO">
+	<insert id="boardPostOk" parameterType="com.poby.myapp.vo.BoardVO">
+		INSERT INTO board_tbl(postno, subject, content, username, ipAddr) 
+		VALUES(board_seq.nextval, #{subject}, #{content}, #{username}, #{ipAddr})
+	</insert>
+	<select id="boardList" resultType="com.poby.myapp.vo.BoardVO">
+		SELECT * FROM 
+			(SELECT * FROM 
+				(SELECT postno, subject, username, hitcount, to_char(regdate, 'mm-dd hh:mi') regdate 
+				FROM board_tbl 
+				<if test="searchValue!=null">
+					WHERE ${searchKey} LIKE '%${searchValue}%'
+				</if>
+				ORDER BY postno DESC) 
+			WHERE rownum<![CDATA[<=]]>${nowPage}*${dataPerPage} ORDER BY postno ASC) 
+		<choose>
+			<when test="totalPage!=nowPage">
+				WHERE rownum<![CDATA[<=]]>${dataPerPage} ORDER BY postno DESC
+			</when>
+			<otherwise>
+				WHERE rownum<![CDATA[<=]]>${lastPageData} ORDER BY postno DESC
+			</otherwise>
+		</choose>
+	</select>
+	<select id="totalData" resultType="int">
+		SELECT count(postno) FROM board_tbl
+		<if test="searchValue!=null">
+			WHERE ${searchKey} LIKE '%${searchValue}%'
+		</if>
+	</select>
+</mapper>

@@ -21,6 +21,6 @@
 				<li><a href="/myapp/member/myAccount?username=${ logUsername }&name=${ logName }">회원정보수정</a></li>
 			</c:if>
 			<li><a href="/myapp/board/boardList">게시판</a></li>
-			<li><a href="#">자료실</a></li>
+			<li><a href="/myapp/data/dataList">자료실</a></li>
 		</ul>
 	</div>

@@ -4,6 +4,16 @@
 <link rel="stylesheet" href="/myapp/js_css/board.css" type="text/css">
 <!-- attribute로 넘어온 변수 : list, pvo -->
 <title>게시판 목록</title>
+<script>
+	function searchCheck(){
+		// 검색어 입력여부 확인
+		if(document.getElementById("searchValue").value=="") {
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+		return true;
+	}
+</script>
 <div class="container">
 	<h1>게시판 목록</h1>
 	<div>
@@ -32,7 +42,7 @@
 				<li>prev</li>
 			</c:if>
 			<c:if test="${ pvo.nowPage>1 }">
-				<li><a href="/myapp/board/boardList?nowPage=${ pvo.nowPage-1 }">prev</a></li>
+				<li><a href='/myapp/board/boardList?nowPage=${ pvo.nowPage-1 }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>prev</a></li>
 			</c:if>
 			<!-- 페이지 번호 출력 -->
 			<c:forEach var="i" begin="${ pvo.startPage }" end="${ pvo.startPage+pvo.pageCount-1 }">
@@ -44,7 +54,7 @@
 					</c:if>
 					<!-- 현재 페이지 아님 -->
 					<c:if test="${ i!=pvo.nowPage }">
-						<li><a href="/myapp/board/boardList?nowPage=${ i }">${ i }</a></li>
+						<li><a href='/myapp/board/boardList?nowPage=${ i }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>${ i }</a></li>
 					</c:if>
 				</c:if>
 			</c:forEach>
@@ -53,17 +63,17 @@
 				<li>next</li>
 			</c:if>
 			<c:if test="${ pvo.nowPage<pvo.totalPage }">
-				<li><a href="/myapp/board/boardList?nowPage=${ pvo.nowPage+1 }">next</a></li>
+				<li><a href='/myapp/board/boardList?nowPage=${ pvo.nowPage+1 }<c:if test="${ pvo.searchValue!=null }">&searchKey=${ pvo.searchKey }&searchValue=${ pvo.searchValue }</c:if>'>next</a></li>
 			</c:if>
 		</ul>
 	</div>
 	<!-- 검색 기능 -->
 	<div class="searchDiv">
-		<form action="/myapp/board/boardList">
+		<form action="/myapp/board/boardList" onsubmit="return searchCheck()">
 			<select name="searchKey">
-				<option>제목</option>
-				<option>내용</option>
-				<option>작성자</option>
+				<option value="subject">제목</option>
+				<option value="content">내용</option>
+				<option value="username">작성자</option>
 			</select>
 			<input type="text" name="searchValue" id="searchValue">
 			<input type="submit" value="검색">
