@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- attribute : list -->
 <style>
 	.dataDiv{
 		overflow:auto;
@@ -29,25 +30,19 @@
 		<li>조회수</li>
 		<li>첨부</li>
 		<li>등록일</li>
-
-		<li>10</li>
-		<li>ㅁㄹㅎㅇㄴㅁ</li>
-		<li>포비</li>
-		<li>0</li>
-		<li>
-			<a href="" download><img src="/myapp/img/disk.png"></a>
-			<a href="" download><img src="/myapp/img/disk.png"></a>
-		</li>
-		<li>12-15 16:26</li>
 		
-		<li>10</li>
-		<li>ㅁㄹㅎㅇㄴㅁ</li>
-		<li>포비</li>
-		<li>0</li>
-		<li>
-			<a href="" download><img src="/myapp/img/disk.png"></a>
-			<a href="" download><img src="/myapp/img/disk.png"></a>
-		</li>
-		<li>12-15 16:26</li>		
+		<c:forEach var="vo" items="${ list }">
+			<li>${ vo.postno }</li>
+			<li><a href="/myapp/data/dataView?postno=${ vo.postno }">${ vo.subject }</a></li>
+			<li>${ vo.username }</li>
+			<li>${ vo.hitcount }</li>
+			<li>
+				<a href="/myapp/upload/${ vo.filename1 }" download><img src="/myapp/img/disk.png" title="${ vo.filename1 }"></a>
+				<c:if test="${ vo.filename2!=null && vo.filename2!='' }">
+					<a href="/myapp/upload/${ vo.filename2 }" download><img src="/myapp/img/disk.png" title="${ vo.filename2 }"></a>
+				</c:if>
+			</li>
+			<li>${ vo.regdate }</li>
+		</c:forEach>
 	</ul>
 </div>

@@ -1,5 +1,7 @@
 package com.poby.myapp.vo;
 
+import java.util.List;
+
 public class DataVO {
 	private int postno;
 	private String username;
@@ -10,12 +12,16 @@ public class DataVO {
 	private String filename1;
 	private String filename2;
 	
+	// 삭제할 파일 목록
+	// private String[] delFile;
+	private List<String> delFile;
+	
 	
 	@Override
 	public String toString() {
 		return "DataVO [postno=" + postno + ", username=" + username + ", subject=" + subject + ", content=" + content
 				+ ", hitcount=" + hitcount + ", regdate=" + regdate + ", filename1=" + filename1 + ", filename2="
-				+ filename2 + "]";
+				+ filename2 + ", delFile=" + delFile + "]";
 	}
 	public int getPostno() {
 		return postno;
@@ -64,5 +70,11 @@ public class DataVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
+	}
+	public List<String> getDelFile() {
+		return delFile;
+	}
+	public void setDelFile(List<String> delFile) {
+		this.delFile = delFile;
 	}
 }

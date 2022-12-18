@@ -7,6 +7,7 @@
 	}
 	.dataFormDiv>li{
 		float:left;
+		padding:5px 0;
 		width:10%;
 	}
 	.dataFormDiv>li:nth-child(2n){
@@ -46,17 +47,17 @@
 	<form method="post" action="/myapp/data/dataPostOk" enctype="multipart/form-data" onsubmit="return formCheck()">
 		<ul class="dataFormDiv">
 			<li>제목</li>
-			<li><input type="text" name="subject" id="subject"/></li>
+			<li><input type="text" name="subject" id="subject"></li>
 			<li>내용</li>
 			<li>
 				<textarea name="content" id="content"></textarea>
 			</li>
 			<li>첨부파일</li>
 			<li>
-				<input type="file" name="filename1" id="filename1"/><br>
-				<input type="file" name="filename2" id="filename2"/>
+				<input type="file" name="filename" id="filename1"><br>
+				<input type="file" name="filename" id="filename2">
 			</li>
-			<li><input type="submit" value="글 올리기"/></li>
+			<li><input type="submit" value="글 올리기"></li>
 		</ul>
 	</form>
 </div>

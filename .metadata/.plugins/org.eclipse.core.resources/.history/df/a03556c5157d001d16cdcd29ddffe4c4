@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- attribute : vo -->
+<style>
+	#editForm>ul{
+		overflow:auto;
+	}
+	#editForm>ul>li{
+		float:left;
+		padding:5px 0;
+		width:10%;
+	}
+	#editForm>ul>li:nth-child(2n){
+		width:90%;
+	}
+	#subject, #content{
+		width:90%;
+	}
+	#content{
+		height:200px;
+	}
+</style>
+<script>
+	$(function(){
+		// X를 눌러 기존 첨부파일은 제거하고, 새로운 파일을 선택할 수 있도록 해주는 이벤트
+		$("#editForm b.del").click(function(){
+			$(this).parent().css("display","none");	// 부모태그에 style="display:none" 추가
+			// type="hidden" -> type="file"로 바꿔서 새로운 파일을 선택할 수 있도록 한다.
+			$(this).parent().next().children().attr("type","file");	// 부모태그의 다음 태그의 자식태그에 속성 type="file" 추가
+			$(this).parent().next().next().attr("name","delFile");	// 부모태그의 다음다음태그에 속성 name="delFile" 추가
+		});
+	});
+</script>
+<title>자료실 수정</title>
+<div class="container">
+	<h1>자료 올리기</h1>
+	<form method="post" action="/myapp/data/dataEditOk" enctype="multipart/form-data" id="editForm">
+		<ul>
+			<li>제목</li>
+			<li><input type="text" name="subject" id="subject" value="${ vo.subject }"></li>
+			<li>내용</li>
+			<li>
+				<textarea name="content" id="content">${ vo.content }</textarea>
+			</li>
+			<li>첨부파일</li>
+			<li>
+				<!-- 첫번째 첨부파일 -->
+				<div>${ vo.filename1 }&nbsp;&nbsp;&nbsp;&nbsp;<b class="del">X</b></div>
+				<div><input type="hidden" name="filename" id="filename1"></div>
+				<input type="hidden" name value="${ vo.filename1 }">	<!-- 삭제한 파일에 대한 정보 -->
+				<!-- 두번째 첨부파일 있을때-->
+				<c:if test="${ vo.filename2!=null && vo.filename2!='' }">
+					<div>${ vo.filename2 }&nbsp;&nbsp;&nbsp;&nbsp;<b class="del">X</b></div>
+					<div><input type="hidden" name="filename" id="filename2"></div>
+					<input type="hidden" name value="${ vo.filename2 }">
+				</c:if>
+				<!-- 두번째 첨부파일 없을때 -->
+				<c:if test="${ vo.filename2==null || vo.filename2=='' }">
+					<div><input type="file" name="filename" id="filename2"></div>
+				</c:if>
+			</li>
+			<li><input type="submit" value="수정하기"></li>
+		</ul>
+	</form>
+</div>

@@ -1,8 +1,0 @@
-package com.poby.myapp;
-
-public class TestVO {
-	private int num;
-	private String name;
-	
-	
-}

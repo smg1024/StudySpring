@@ -1,0 +1,8 @@
+package com.poby.myapp.dao;
+
+import com.poby.myapp.vo.DataVO;
+
+public interface DataDAO {
+	// 자료 올리기
+	public int dataPostOk(DataVO vo);
+}
