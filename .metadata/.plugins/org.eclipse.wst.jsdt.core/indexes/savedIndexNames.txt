@@ -5,6 +5,4 @@ INDEX VERSION 1.4+/Users/poby/StudySpring/.metadata/.plugins/org.eclipse.wst.jsd
 1466556057.index
 3990362432.index
 666587592.index
-1981994926.index
-1060933534.index
 3456684476.index

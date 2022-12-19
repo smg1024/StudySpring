@@ -198,3 +198,14 @@
 0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:41:56 +0900] "GET /myapp/ HTTP/1.1" 200 1043
 0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:41:57 +0900] "GET /myapp/ajaxView HTTP/1.1" 200 3002
 0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:41:59 +0900] "GET /myapp/ajaxList?nowPage=2 HTTP/1.1" 200 870
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:35 +0900] "GET /myapp/ajaxList?nowPage=2 HTTP/1.1" 500 39732
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:38 +0900] "GET /myapp/ajaxList?nowPage=2 HTTP/1.1" 500 39732
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:39 +0900] "GET /myapp/ajaxObject?username=%EC%84%B8%EC%A2%85%EB%8C%80%EC%99%95&tel=010-9701-5637&age=25 HTTP/1.1" 200 79
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:40 +0900] "GET /myapp/ajaxList?nowPage=2 HTTP/1.1" 500 39732
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:41 +0900] "GET /myapp/ajaxString?num=12&name=%ED%99%8D%EA%B8%B8%EB%8F%99 HTTP/1.1" 200 47
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:41 +0900] "GET /myapp/ajaxObject?username=%EC%84%B8%EC%A2%85%EB%8C%80%EC%99%95&tel=010-9701-5637&age=25 HTTP/1.1" 200 79
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:45 +0900] "GET /myapp/ajaxObject?username=%EC%84%B8%EC%A2%85%EB%8C%80%EC%99%95&tel=010-9701-5637&age=25 HTTP/1.1" 200 79
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:47 +0900] "GET /myapp/ajaxObject?username=%EC%84%B8%EC%A2%85%EB%8C%80%EC%99%95&tel=010-9701-5637&age=25 HTTP/1.1" 200 79
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:52 +0900] "GET /myapp/ajaxList?nowPage=2 HTTP/1.1" 500 39732
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:57 +0900] "GET /myapp/ajaxString?num=12&name=%ED%99%8D%EA%B8%B8%EB%8F%99 HTTP/1.1" 200 47
+0:0:0:0:0:0:0:1 - - [19/Dec/2022:17:47:58 +0900] "GET /myapp/ajaxString?num=12&name=%ED%99%8D%EA%B8%B8%EB%8F%99 HTTP/1.1" 200 47
