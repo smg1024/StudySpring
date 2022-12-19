@@ -28,4 +28,19 @@ public class DataServiceImpl implements DataService {
 	public DataVO dataView(int postno) {
 		return dao.dataView(postno);
 	}
+
+	@Override
+	public DataVO selectFilename(int postno) {
+		return dao.selectFilename(postno);
+	}
+
+	@Override
+	public int dataEdit(DataVO vo) {
+		return dao.dataEdit(vo);
+	}
+
+	@Override
+	public int dataDel(int postno, String username) {
+		return dao.dataDel(postno, username);
+	}
 }

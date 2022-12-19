@@ -13,4 +13,13 @@ public interface DataDAO {
 	
 	// 글 보기
 	public DataVO dataView(int postno);
+	
+	// 파일 선택하기
+	public DataVO selectFilename(int postno);
+	
+	// 자료 수정하기
+	public int dataEdit(DataVO vo);
+	
+	// 글 삭제하기
+	public int dataDel(int postno, String username);
 }

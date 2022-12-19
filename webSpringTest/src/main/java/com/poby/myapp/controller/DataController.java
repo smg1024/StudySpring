@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -154,5 +156,140 @@ public class DataController {
 		mav.setViewName("data/dataEdit");
 		
 		return mav;
+	}
+	
+	// 글 수정 올리기 페이지
+	@PostMapping("/data/dataEditOk")
+	public ModelAndView dataEditOk(HttpServletRequest req, DataVO vo) {
+		ModelAndView mav = new ModelAndView();
+		
+		vo.setUsername((String)req.getSession().getAttribute("logUsername"));
+		
+		// 업로드 파일 위치, 파일 삭제 위치
+		String path = req.getSession().getServletContext().getRealPath("/upload");
+		
+		// 파일 업로드 처리를 해줄 MultipartHttpServletRequest객체 생성
+		MultipartHttpServletRequest mr = (MultipartHttpServletRequest) req;
+		
+		// DB에 등록되어 있는 수정 전 파일명 
+		DataVO dbVO = service.selectFilename(vo.getPostno());
+		
+		// DB파일명, 삭제파일명, 새로 업로드한 파일명을 관리하기 위한 객체
+		List<String> dbFile = new ArrayList<String>();
+		
+		// DB에서 읽어온 수정 전 파일명을 dbFile에 추가하기
+		dbFile.add(dbVO.getFilename1());
+		if(dbVO.getFilename2()!=null) dbFile.add(dbVO.getFilename2());
+		
+		// 수정 form에서 삭제할 파일을 dbFile에서 제거하기
+		if(vo.getDelFile()!=null) {	// 삭제할 파일이 있으면
+			for(String delFile : vo.getDelFile()) {
+				// System.out.println("delFile -> " + delFile);
+				dbFile.remove(delFile);
+			}
+		}
+		
+		//-------------------파일 업로드--------------------
+		List<MultipartFile> fileList = mr.getFiles("filename");
+		List<String> uploadFileList = new ArrayList<String>();	// 새로 업로드한 파일명 관리
+		
+		if(fileList!=null) {	// 업로드할 파일이 있을 때
+			// 파일 수 만큼
+			for(int i=0; i<fileList.size(); i++) {
+				MultipartFile mf = fileList.get(i);
+				String file = mf.getOriginalFilename();	// 업로드한 원래 파일명
+				if(file!=null && !file.equals("")){
+					File f = new File(path, file);
+					
+					if(f.exists()) {	// 이미 파일명 존재하면
+						for(int renameNum=1;;renameNum++) {	// 번호매기기
+							int dot = file.lastIndexOf(".");
+							String filename = file.substring(0, dot);
+							String extension = file.substring(dot+1);	// 파일명, 확장자 분리
+							
+							String newFilename = filename+"("+renameNum+")."+extension;
+							f = new File(path, newFilename);
+							
+							if(!f.exists()) {
+								file = newFilename;
+								break;
+							}
+						}
+					}
+					
+					// 실제 업로드(새로운 파일명으로 업로드)
+					try {
+						mf.transferTo(new File(path, file));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					
+					// dbFile과 uploadFileList에 등록
+					uploadFileList.add(file);
+					dbFile.add(file);	// DB 업데이트 시 필요
+				}
+			}
+		}//--------------------파일 업로드 끝---------------------
+		// dbFile의 내용을 vo에 세팅
+		for(int i=0; i<dbFile.size(); i++) {
+			System.out.println("dbFile -> " + dbFile.get(i));
+			if(i==0) vo.setFilename1(dbFile.get(i));
+			if(i==1) vo.setFilename2(dbFile.get(i));
+		}
+		
+		// DB 업데이트
+		int result = service.dataEdit(vo);
+		
+		if(result>0){// 업데이트가 된 경우 -> 삭제파일이 있으면 지우기
+			fileDelete(vo.getDelFile(), path);	// 파일 삭제 메소드 이용
+			mav.addObject("postno", vo.getPostno());
+			mav.setViewName("redirect:dataView");
+		}else{// 업데이트가 실패한 경우 -> 새로 업로드한 파일 지우기
+			fileDelete(uploadFileList, path);
+			mav.setViewName("data/dataEditOk");
+		}
+		
+		return mav;
+	}
+	
+	// 글 삭제
+	@GetMapping("/data/dataDel/{postno}")
+	public ModelAndView dataDel(@PathVariable("postno") int postno, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String username = (String)session.getAttribute("logUsername");
+		String path = session.getServletContext().getRealPath("/upload");
+		
+		// 삭제할 데이터의 파일명 보관
+		DataVO dbVO = service.selectFilename(postno);
+		
+		// 데이터 삭제
+		int result = service.dataDel(postno, username);
+		
+		// 파일 삭제
+		if(result>0){	// 삭제 성공 시 글 목록
+			File f = new File(path, dbVO.getFilename1());
+			f.delete();
+			
+			if(dbVO.getFilename2()!=null) {
+				f = new File(path, dbVO.getFilename2());
+				f.delete();
+			}
+			mav.setViewName("redirect:/data/dataList");
+		}else{	// 삭제 실패 시 글 보기
+			mav.addObject("postno", postno);
+			mav.setViewName("redirect:/data/dataView");
+		}
+		
+		return mav;
+	}
+	
+	// 파일 삭제 메소드
+	public void fileDelete(List<String> delFileList, String path) {
+		if(delFileList!=null) {
+			for(String file : delFileList) {
+				File f = new File(path, file);
+				f.delete();
+			}
+		}
 	}
 }

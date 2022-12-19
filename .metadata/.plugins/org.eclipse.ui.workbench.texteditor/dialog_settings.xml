@@ -13,9 +13,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="dbVO"/>
 		<list key="findhistory">
+			<item value="delVO"/>
+			<item value="dbFile"/>
 		</list>
 		<list key="replacehistory">
+			<item value="dbVO"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

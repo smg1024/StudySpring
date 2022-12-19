@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<title>ajaxView.jsp</title>
+<div class="container">
+	<h1>AJAX : 동기식, 비동기식으로 요청처리</h1>
+	<pre>
+		pom.xml에서 gson프레임워크 추가
+	</pre>
+	<div>
+		<input type="button" value="String" id="ajaxString">
+	</div>
+	<div id="ajaxResult"></div>
+</div>

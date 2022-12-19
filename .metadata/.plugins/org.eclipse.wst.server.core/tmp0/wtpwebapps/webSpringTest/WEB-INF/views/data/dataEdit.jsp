@@ -58,6 +58,7 @@
 <div class="container">
 	<h1>자료 올리기</h1>
 	<form method="post" action="/myapp/data/dataEditOk" enctype="multipart/form-data" id="editForm">
+		<input type="hidden" name="postno" value="${ vo.postno }">
 		<ul>
 			<li>제목</li>
 			<li><input type="text" name="subject" id="subject" value="${ vo.subject }"></li>

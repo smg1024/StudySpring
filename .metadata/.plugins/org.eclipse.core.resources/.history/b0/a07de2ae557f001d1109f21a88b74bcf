@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.poby.myapp.dao.DataDAO">
+	<insert id="dataPostOk">
+		INSERT INTO data_tbl(postno, subject, content, username, filename1<if test="filename2!=null">, filename2</if>) 
+		VALUES(board_seq.nextval, #{subject}, #{content}, #{username}, #{filename1}<if test="filename2!=null">, #{filename2}</if>)
+	</insert>
+	<select id="dataList" resultType="com.poby.myapp.vo.DataVO">
+		SELECT postno, subject, username, hitcount, to_char(regdate, 'mm-dd hh:mi') regdate, filename1, filename2 
+		FROM data_tbl ORDER BY postno desc
+	</select>
+	<select id="dataView" resultType="com.poby.myapp.vo.DataVO">
+		SELECT postno, subject, username, content, hitcount, regdate, filename1, filename2 
+		FROM data_tbl WHERE postno=${param1}
+	</select>
+	<select id="selectFilename" resultType="com.poby.myapp.vo.DataVO">
+		SELECT filename1, filename2 FROM data_tbl WHERE postno=${param1}
+	</select>
+	<update id="dataEdit">
+		UPDATE data_tbl SET subject=#{subject}, content=#{content}, filename1=#{filename1}
+		<choose>
+			<when test="filename2!=null">
+				, filename2=#{filename2}
+			</when>
+			<otherwise>
+				. filename2=null
+			</otherwise>
+		</choose>
+		WHERE postno=#{postno} AND username=#{username}
+	</update>
+</mapper>
