@@ -1,0 +1,8 @@
+package com.poby.myapp.service;
+
+import com.poby.myapp.vo.CommentVO;
+
+public interface CommentService {
+	// 댓글 달기
+	public int commentPost(CommentVO vo);
+}

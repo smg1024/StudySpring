@@ -1,0 +1,8 @@
+package com.poby.myapp.dao;
+
+import com.poby.myapp.vo.CommentVO;
+
+public interface CommentDAO {
+	// 댓글 달기
+	public int commentPost(CommentVO vo);
+}

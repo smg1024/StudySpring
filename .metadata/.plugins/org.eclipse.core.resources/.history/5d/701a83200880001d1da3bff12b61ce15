@@ -1,0 +1,5 @@
+package com.poby.myapp.vo;
+
+public class CommentVO {
+
+}

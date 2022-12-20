@@ -1,0 +1,137 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- attribute : vo -->
+<title>${ vo.subject }</title>
+<style>
+	#content{
+		width:400px;
+		height:60px;
+	}
+	#commentList>li{
+		border-bottom:1px solid gray;
+		padding:5px 0px;
+	}
+</style>
+<script>
+	function delCheck(){
+		location.href = "/myapp/board/boardDel?postno=${vo.postno}";
+	}
+	
+	// Ajax 댓글 처리하기
+	$(function(){
+		// 댓글 목록 가져오기
+		function commentList(){
+			var params = {postno:${vo.postno}};
+			var url = "/myapp/commentList"
+			$.ajax({
+				url:url,
+				data:params,
+				type:"GET",
+				success:function(result){
+					// console.log(result);
+					$result = $(result);
+					var tag = "";
+					
+					$result.each(function(idx, commentVO){
+						tag += "<li>";
+						tag += "<div><b>"+commentVO.username+"</b>("+commentVO.regdate+")";
+						if(commentVO.username == '${logUsername}'){	// 본인 댓글에만 수정/삭제 버튼 표시
+							tag += "<input type='button' value='수정'>";
+							tag += "<input type='button' value='삭제'>";
+						}
+						tag += "</div>";
+						tag += "<div>"+commentVO.content+"</div>";
+						if(commentVO.username == '${logUsername}'){	// 본인이 쓴 글일때 수정 form
+							tag += "<div style='display:none'>";
+							tag += "<form method='post'>"
+							tag += "<textarea name='content' rows='3' cols='50'>"+commentVO.content+"</textarea>";
+							tag += "<input type='hidden' name='replyno' value='"+commentVO.replyno+"'>";
+							tag += "<input type='submit' value='수정하기'>";
+							tag += "</form>";
+							tag += "</div>";
+						}
+						tag += "</li>";
+					});
+					console.log(tag);
+					// html() : 기존 내용을 지우고 새로(html태그) 추가하기
+					// text() : 기존 내용을 지우고 새로(text) 추가하기
+					$("#commentList").html(tag);
+					
+				},error:function(e){
+					console.log(e.responseText);
+				}
+			});
+		}
+		
+		// 댓글 form에서 submit이 발생하면
+		$("#commentBtn").click(function(){
+			// $(this).preventDefault();	// form태그의 기본 action이벤트 제거하기
+			
+			if($("#content").val()==""){	// comment확인
+				alert("댓글을 입력하세요.");
+				return false;
+			}
+			
+			var params = $("#commentForm").serialize();	// form의 데이터를 쿼리로 만들어주는 함수
+			var url = "/myapp/commentPost";
+			
+			$.ajax({
+				url:url,
+				data:params,
+				type:"POST",
+				success:function(result){
+					// console.log(result);
+					$("#content").val("");	// 입력칸을 비워주고,
+					// 글 댓글 목록을 다시 가져오기
+					commentList();
+				},error:function(e){
+					console.log(e.responseText);
+				}
+			});
+		});
+		
+		// 댓글 수정 form 보여주기
+		$(document).on('click','#commentList input[value=수정]',function(){
+			$(this).parent().next().css("display","none");	// 댓글 숨김
+			$(this).parent().next().next().css("display","block");	// 댓글 수정 form 표시
+		});
+		
+		// 처음 글 보기 페이지 들어오면 댓글을 비동기식으로 가져오기
+		commentList();
+	});
+</script>
+<div class="container">
+	<h1>글 내용 보기</h1>
+	<ul>
+		<li>글 번호</li>
+		<li>${ vo.postno }</li>
+		<li>작성자</li>
+		<li>${ vo.username }</li>
+		<li>등록일</li>
+		<li>${ vo.regdate }</li>
+		<li>조회수</li>
+		<li>${ vo.hitcount }</li>
+		<li>제목</li>
+		<li>${ vo.subject }</li>
+		<li>내용</li>
+		<li>${ vo.content }</li>
+	</ul>
+	<div>
+		<a href="/myapp/board/boardEdit?postno=${ vo.postno }">수정</a>
+		<a href="javascript:delCheck()">삭제</a>
+	</div>
+	
+	<!-- 댓글 등록 form -->
+	<form id="commentForm">
+		<!-- 원글 고유번호 -->
+		<input type="hidden" name="postno" value="${ vo.postno }">
+		<textarea name="content" id="content"></textarea>
+		<input type="button" value="댓글 달기" id="commentBtn">
+	</form>
+	
+	<!-- 기존 댓글 목록 -->
+	<ul id="commentList">
+		
+	</ul>
+</div>

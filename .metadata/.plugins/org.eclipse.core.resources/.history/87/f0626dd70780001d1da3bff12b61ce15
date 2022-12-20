@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- attribute : vo -->
+<title>${ vo.subject }</title>
+<style>
+	#content{
+		width:400px;
+		height:60px;
+	}
+	#commentList>li{
+		border-bottom:1px solid gray;
+		padding:5px 0px;
+	}
+</style>
+<script>
+	function delCheck(){
+		location.href = "/myapp/board/boardDel?postno=${vo.postno}";
+	}
+</script>
+<div class="container">
+	<h1>글 내용 보기</h1>
+	<ul>
+		<li>글 번호</li>
+		<li>${ vo.postno }</li>
+		<li>작성자</li>
+		<li>${ vo.username }</li>
+		<li>등록일</li>
+		<li>${ vo.regdate }</li>
+		<li>조회수</li>
+		<li>${ vo.hitcount }</li>
+		<li>제목</li>
+		<li>${ vo.subject }</li>
+		<li>내용</li>
+		<li>${ vo.content }</li>
+	</ul>
+	<div>
+		<a href="/myapp/board/boardEdit?postno=${ vo.postno }">수정</a>
+		<a href="javascript:delCheck()">삭제</a>
+	</div>
+	<!-- 댓글 등록 form -->
+	<form method="post" id="commentForm">
+		<!-- 원글 고유번호 -->
+		<input type="hidden" name="postno" value="${ vo.postno }">
+		<textarea name="content" id="content"></textarea>
+		<input type="submit" value="댓글 달기">
+	</form>
+	<!-- 기존 댓글 목록 -->
+	<ul id="commentList">
+		<li>
+			<div><b>poby</b>(2022-10-10 20:10:10)
+				<input type="button" value="수정">
+				<input type="button" value="삭제">
+			</div>
+			<div>좋아요, 신고</div>
+		</li>
+		<li>
+			<div><b>poby</b>(2022-10-10 20:10:10)
+			</div>
+			<div>좋아요, 신고</div>
+		</li>
+	</ul>
+</div>

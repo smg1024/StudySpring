@@ -73,6 +73,28 @@
 				}
 			});
 		});
+		
+		// 비동기식으로 Map객체 얻어오기
+		$("#ajaxMap").click(function(){
+			
+			$.ajax({
+				url:"/myapp/ajaxMap",
+				success:function(result){
+					// console.log(result);
+					var tag = "<ul>";
+					tag += "<li>총 데이터 수 : " + result.totalData + "</li>";
+					tag += "<li>메시지 : " + result.msg + "</li>";
+					tag += "<li>글 번호 -> " + result.vo.postno + "<br>";
+					tag += "글 제목 -> " + result.vo.subject + "<br>";
+					tag += "작성일 -> " + result.vo.regdate + "</li>";
+					
+					$("#ajaxResult").append(tag);
+				},error:function(e){
+					console.log(e.responseText);
+				}
+			});
+			
+		});
 	});
 </script>
 <div class="container">
@@ -84,6 +106,7 @@
 		<input type="button" value="String" id="ajaxString">
 		<input type="button" value="Object" id="ajaxObject">
 		<input type="button" value="List" id="ajaxList">
+		<input type="button" value="Map" id="ajaxMap">
 	</div>
 	<div id="ajaxResult"></div>
 </div>

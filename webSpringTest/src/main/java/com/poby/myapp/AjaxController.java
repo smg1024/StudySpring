@@ -1,5 +1,6 @@
 package com.poby.myapp;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,21 @@ public class AjaxController {
 		List<BoardVO> list = service.boardList(pvo);
 		
 		return list;
+	}
+	
+	// 리턴이 Map일때
+	@GetMapping("/ajaxMap")
+	@ResponseBody
+	public HashMap ajaxMap(PageVO pvo) {
+		// 총 데이터 수(PageVO)와 글 보기(BoardVO)를 리턴한다.
+		int totalData = service.totalData(pvo);
+		BoardVO vo = service.boardView(59);	// 임의로 게시글 하나 고름
+		
+		HashMap map = new HashMap();
+		map.put("totalData", totalData);
+		map.put("vo", vo);
+		map.put("msg", "맵을 이용한 비동기식 처리하기");
+		
+		return map;
 	}
 }
