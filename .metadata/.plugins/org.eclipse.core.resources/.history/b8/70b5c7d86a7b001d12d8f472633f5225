@@ -1,8 +1,0 @@
-package com.poby.myapp.dao;
-
-import com.poby.myapp.vo.BoardVO;
-
-public interface BoardDAO {
-	// 새 글 등록
-	public int boardPostOk(BoardVO vo);
-}

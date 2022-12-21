@@ -1,5 +1,0 @@
-package com.poby.myapp.service;
-
-public class BoardServiceImpl implements BoardService {
-
-}

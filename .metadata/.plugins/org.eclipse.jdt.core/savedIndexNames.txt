@@ -21,7 +21,6 @@ INDEX VERSION 1.131+/Users/poby/StudySpring/.metadata/.plugins/org.eclipse.jdt.c
 3808759512.index
 2703788223.index
 1865797976.index
-4249009426.index
 1548077921.index
 3671104395.index
 2560522756.index
